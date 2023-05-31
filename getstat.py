@@ -35,4 +35,7 @@ for filename in filenames:
 
 all.sort()
 for item in all:
-    print item[1] + "\t\tSUM:" + str(item[0]) + "\t\tRX:" + str(item[2]) + "\t\tTX:" + str(item[3])
+    if len(item[1])<8:
+        print item[1] + "\t\tSUM:" + str(item[0]) + "\t\tRX:" + str(item[2]) + "\t\tTX:" + str(item[3])
+    else:
+        print item[1] + "\tSUM:" + str(item[0]) + "\t\tRX:" + str(item[2]) + "\t\tTX:" + str(item[3])
