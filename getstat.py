@@ -3,7 +3,7 @@ import sys
 import json
 
 if len(sys.argv)<2:
-    print("Usage: python getstat.py filename")
+    print("Usage: python getstat.py path")
     raise SystemExit
 
 # Iterate directory
