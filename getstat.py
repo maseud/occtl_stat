@@ -21,7 +21,7 @@ for path in os.listdir(dir_path):
     # check if current path is a file
     if os.path.isfile(os.path.join(dir_path, path)):
         filenames.append(path)
-#print(filenames)
+print ""
 
 all = []
 sumrx = 0
@@ -48,8 +48,9 @@ for filename in filenames:
 all.sort()
 for item in all:
     if len(item[1])<8:
-        print item[1] + "\t\tSUM:" + str(item[0]) + "\t\tRX:" + str(item[2]) + "\t\tTX:" + str(item[3])
+        print item[1] + "\t\tSUM:" + human_format(item[0]) + "\tRX:" + human_format(item[2]) + "\tTX:" + human_format(item[3])
     else:
-        print item[1] + "\tSUM:" + str(item[0]) + "\t\tRX:" + str(item[2]) + "\t\tTX:" + str(item[3])
-print "------------\t------------\t\t------------\t\t------------"
-print "TOTAL\t\tSUM:"+human_format(sumrx+sumtx)+"\t\tRX:"+human_format(sumrx)+"\t\tTX:"+human_format(sumtx)
+        print item[1] + "\tSUM:" + human_format(item[0]) + "\tRX:" + human_format(item[2]) + "\tTX:" + human_format(item[3])
+print "------------\t------------\t------------\t------------"
+print "TOTAL\t\tSUM:"+human_format(sumrx+sumtx)+"\tRX:"+human_format(sumrx)+"\tTX:"+human_format(sumtx)
+print ""
