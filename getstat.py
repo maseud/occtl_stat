@@ -3,7 +3,7 @@ import sys
 import json
 
 if len(sys.argv)<2:
-    print("Usage: python getstat.py path")
+    print("Usage: python getstat.py filename")
     raise SystemExit
 
 # Iterate directory
@@ -16,6 +16,8 @@ for path in os.listdir(dir_path):
 #print(filenames)
 
 all = []
+sumrx = 0
+sumtx = 0
 for filename in filenames:
     userfilename = os.path.join(dir_path, filename)
     file_user = open(userfilename, "r")
@@ -30,8 +32,9 @@ for filename in filenames:
         name = stat[0]
         rx = rx + int(stat[1])
         tx = tx + int(stat[2])
-    sum = rx + tx
-    all.append([sum, name, rx, tx])
+    sumrx = sumrx + rx
+    sumtx = sumtx + tx
+    all.append([rx+tx, name, rx, tx])
 
 all.sort()
 for item in all:
@@ -39,3 +42,5 @@ for item in all:
         print item[1] + "\t\tSUM:" + str(item[0]) + "\t\tRX:" + str(item[2]) + "\t\tTX:" + str(item[3])
     else:
         print item[1] + "\tSUM:" + str(item[0]) + "\t\tRX:" + str(item[2]) + "\t\tTX:" + str(item[3])
+print "------------\t------------\t\t------------\t\t------------"
+print "TOTAL\t\tSUM:" + str(sumrx+sumtx) + "\t\tRX:" + str(sumrx) + "\t\tTX:" + str(sumtx)
