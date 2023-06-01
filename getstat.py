@@ -2,6 +2,14 @@ import os
 import sys
 import json
 
+def human_format(num):
+    num = float('{:.3g}'.format(num))
+    magnitude = 0
+    while abs(num) >= 1000:
+        magnitude += 1
+        num /= 1000.0
+    return '{}{}'.format('{:f}'.format(num).rstrip('0').rstrip('.'), ['', ' KB', ' MB', ' GB', ' TB'][magnitude])
+
 if len(sys.argv)<2:
     print("Usage: python getstat.py filename")
     raise SystemExit
@@ -32,6 +40,7 @@ for filename in filenames:
         name = stat[0]
         rx = rx + int(stat[1])
         tx = tx + int(stat[2])
+
     sumrx = sumrx + rx
     sumtx = sumtx + tx
     all.append([rx+tx, name, rx, tx])
@@ -43,4 +52,4 @@ for item in all:
     else:
         print item[1] + "\tSUM:" + str(item[0]) + "\t\tRX:" + str(item[2]) + "\t\tTX:" + str(item[3])
 print "------------\t------------\t\t------------\t\t------------"
-print "TOTAL\t\tSUM:" + str(sumrx+sumtx) + "\t\tRX:" + str(sumrx) + "\t\tTX:" + str(sumtx)
+print "TOTAL\t\tSUM:"+human_format(sumrx+sumtx)+"\t\tRX:"+human_format(sumrx)+"\t\tTX:"+human_format(sumtx)
