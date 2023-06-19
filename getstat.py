@@ -23,27 +23,32 @@ for path in os.listdir(dir_path):
         filenames.append(path)
 print ""
 
+fltr = ""
+if len(sys.argv)>2:
+    fltr = sys.argv[2]
+    
 all = []
 sumrx = 0
 sumtx = 0
 for filename in filenames:
-    userfilename = os.path.join(dir_path, filename)
-    file_user = open(userfilename, "r")
-    stats = json.load(file_user)
-    file_user.close()
-    #print(stats)
-    #stat[index] = [name, rx, tx, date, time, duration, ip]
+    if fltr in filename:
+        userfilename = os.path.join(dir_path, filename)
+        file_user = open(userfilename, "r")
+        stats = json.load(file_user)
+        file_user.close()
+        #print(stats)
+        #stat[index] = [name, rx, tx, date, time, duration, ip]
 
-    rx = 0
-    tx = 0
-    for stat in stats.values():
-        name = stat[0]
-        rx = rx + int(stat[1])
-        tx = tx + int(stat[2])
+        rx = 0
+        tx = 0
+        for stat in stats.values():
+            name = stat[0]
+            rx = rx + int(stat[1])
+            tx = tx + int(stat[2])
 
-    sumrx = sumrx + rx
-    sumtx = sumtx + tx
-    all.append([rx+tx, name, rx, tx])
+        sumrx = sumrx + rx
+        sumtx = sumtx + tx
+        all.append([rx+tx, name, rx, tx])
 
 all.sort()
 for item in all:
